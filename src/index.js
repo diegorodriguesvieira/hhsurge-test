@@ -1,8 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { Provider } from 'react-redux';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import App from "./App";
+import App from './App';
+import configureStore from './store/configureStore';
 
-import "./index.css";
+const store = configureStore();
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const Root = () => (
+  <Provider store={store}>
+    <CssBaseline />
+    <App />
+  </Provider>
+);
+
+ReactDOM.render(<Root />, document.getElementById('root'));
