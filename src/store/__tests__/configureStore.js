@@ -8,7 +8,7 @@ describe('configureStore', () => {
   beforeEach(() => jest.clearAllMocks());
 
   describe('given no initial state', () => {
-    it('calls createStore with no initial state', () => {
+    test('calls createStore with no initial state', () => {
       expect(configureStore()).toBeInstanceOf(Object);
       expect(redux.createStore).toHaveBeenCalledWith(
         expect.any(Function),
@@ -19,7 +19,7 @@ describe('configureStore', () => {
   });
 
   describe('given initial state', () => {
-    it('calls createStore with initial state', () => {
+    test('calls createStore with initial state', () => {
       const initialState = {};
       expect(configureStore(initialState)).toBeInstanceOf(Object);
       expect(redux.createStore).toHaveBeenCalledWith(
