@@ -47,6 +47,22 @@ describe('Form', () => {
     const passwordField = container.querySelector('input[name="password"]');
 
     await wait(() => {
+      fireEvent.change(usernameField, {
+        target: {
+          value: '',
+        },
+      });
+    });
+
+    await wait(() => {
+      fireEvent.change(passwordField, {
+        target: {
+          value: '',
+        },
+      });
+    });
+
+    await wait(() => {
       fireEvent.blur(usernameField);
       fireEvent.blur(passwordField);
     });
