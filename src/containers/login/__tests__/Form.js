@@ -7,16 +7,16 @@ describe('Form', () => {
   test('Returns the submitted values', async () => {
     const mock = jest.fn();
     const { container } = render(<Form onSubmit={mock} />);
-    const emailField = container.querySelector('input[name="email"]');
+    const usernameField = container.querySelector('input[name="username"]');
     const passwordField = container.querySelector('input[name="password"]');
     const button = container.querySelector('button[type="submit"]');
-    const emailValue = 'email@example.com';
+    const usernameValue = 'username@example.com';
     const passwordValue = 'password';
 
     await wait(() => {
-      fireEvent.change(emailField, {
+      fireEvent.change(usernameField, {
         target: {
-          value: emailValue,
+          value: usernameValue,
         },
       });
     });
@@ -33,26 +33,26 @@ describe('Form', () => {
       fireEvent.click(button);
     });
 
-    const { email, password } = mock.mock.calls[0][0];
+    const { username, password } = mock.mock.calls[0][0];
 
     expect(mock).toBeCalledTimes(1);
-    expect(email).toBe(emailValue);
+    expect(username).toBe(usernameValue);
     expect(password).toBe(passwordValue);
   });
 
   test('Should show validation on blur', async () => {
     const mock = jest.fn();
     const { container } = render(<Form onSubmit={mock} />);
-    const emailField = container.querySelector('input[name="email"]');
+    const usernameField = container.querySelector('input[name="username"]');
     const passwordField = container.querySelector('input[name="password"]');
 
     await wait(() => {
-      fireEvent.blur(emailField);
+      fireEvent.blur(usernameField);
       fireEvent.blur(passwordField);
     });
 
     await wait(() => {
-      expect(container.querySelector('#email-helper-text')).toBeInTheDocument();
+      expect(container.querySelector('#username-helper-text')).toBeInTheDocument();
       expect(container.querySelector('#password-helper-text')).toBeInTheDocument();
     });
   });

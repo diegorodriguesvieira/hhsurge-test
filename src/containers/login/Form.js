@@ -11,7 +11,7 @@ import TextFieldPassword from '../../components/TextFieldPassword';
 
 const LoginForm = ({ onSubmit }) => {
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Campo obrigatório'),
+    username: Yup.string().required('Campo obrigatório'),
     password: Yup.string().required('Campo obrigatório'),
   });
 
@@ -25,7 +25,7 @@ const LoginForm = ({ onSubmit }) => {
     <Formik
       onSubmit={onSubmit}
       validationSchema={validationSchema}
-      initialValues={{ email: '', password: '' }}
+      initialValues={{ username: '', password: '' }}
       enableReinitialize
     >
       {({ errors, touched }) => (
@@ -36,12 +36,12 @@ const LoginForm = ({ onSubmit }) => {
                 <Field
                   as={TextField}
                   autoComplete="username"
-                  error={Boolean(hasError(errors, touched, 'email'))}
+                  error={Boolean(hasError(errors, touched, 'username'))}
                   fullWidth
-                  helperText={hasError(errors, touched, 'email')}
-                  id="email"
+                  helperText={hasError(errors, touched, 'username')}
+                  id="username"
                   label="Username or email"
-                  name="email"
+                  name="username"
                   size="small"
                   spellCheck={false}
                   variant="outlined"

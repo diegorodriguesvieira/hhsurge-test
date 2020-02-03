@@ -21,7 +21,9 @@ const Login = () => {
   const user = useSelector(state => state.auth.user);
   const classes = useStyles();
 
-  const handleSubmit = values => values;
+  const handleSubmit = values => {
+    return values;
+  };
 
   if (user) {
     return <Redirect to="/" />;
