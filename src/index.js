@@ -9,13 +9,15 @@ import configureStore from './store/configureStore';
 import Routes from './routes';
 import theme from './theme';
 
+import './styles.scss';
+
 const store = configureStore();
 
 const Root = () => (
   <Provider store={store}>
-    <CssBaseline />
     <BrowserRouter>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Routes />
       </ThemeProvider>
     </BrowserRouter>
