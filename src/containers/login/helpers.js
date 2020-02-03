@@ -7,8 +7,15 @@ export const findUser = (users, username, password) => {
   });
 };
 
-export const isLoggedIn = () => window.localStorage.getItem('user');
+export const isLoggedIn = () => {
+  const user = window.localStorage.getItem('user');
+  return user ? JSON.parse(user) : null;
+};
 
 export const setUserLocalStorage = user => {
   window.localStorage.setItem('user', JSON.stringify(user));
+};
+
+export const removeUserLocalStorage = () => {
+  window.localStorage.removeItem('user');
 };

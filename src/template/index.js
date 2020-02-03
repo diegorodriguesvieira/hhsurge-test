@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Containter from '@material-ui/core/Container';
@@ -6,13 +6,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 
+import { logout } from '../containers/login/ducks';
 import AvatarPopper from './AvatarPopper';
 import Logo from '../components/Logo';
 
 const Template = ({ children }) => {
   const user = useSelector(state => state.auth.user);
+  const dispatch = useDispatch();
 
-  const handleClickLogout = () => {};
+  const handleClickLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <Containter disableGutters>

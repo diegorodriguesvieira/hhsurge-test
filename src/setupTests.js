@@ -43,3 +43,7 @@ global.mockUser2 = {
 };
 
 global.mockUsers = [global.mockUser, global.mockUser2];
+
+global.loggedUser = global.mockUser;
+
+global.storeLoggedIn = { auth: { user: global.loggedUser } };

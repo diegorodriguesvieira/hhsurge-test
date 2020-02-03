@@ -10,8 +10,7 @@ export const LOGIN_SUCCESS = 'app/auth/LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'app/auth/LOGIN_FAILURE';
 
 export const LOGOUT_REQUEST = 'app/auth/LOGOUT_REQUEST';
-export const LOGOUT_SUCESS = 'app/auth/LOGOUT_SUCCESS';
-export const LOGOUT_FAILURE = 'app/auth/LOGOUT_FAILURE';
+export const LOGOUT_SUCCESS = 'app/auth/LOGOUT_SUCCESS';
 
 const INITIAL_STATE = {
   user: helpers.isLoggedIn(),
@@ -30,6 +29,9 @@ export default (state = INITIAL_STATE, { type, payload }) => {
     case LOGIN_LOADING:
       return { ...state, loginLoading: payload };
 
+    case LOGOUT_SUCCESS:
+      return { ...state, ...INITIAL_STATE, user: null };
+
     default:
       return state;
   }
@@ -37,6 +39,10 @@ export default (state = INITIAL_STATE, { type, payload }) => {
 
 export function login(credentials) {
   return { type: LOGIN_REQUEST, payload: credentials };
+}
+
+export function logout() {
+  return { type: LOGOUT_REQUEST };
 }
 
 export function* loginSaga({ payload }) {
@@ -60,6 +66,16 @@ export function* loginSaga({ payload }) {
   }
 }
 
+export function* logoutSaga() {
+  helpers.removeUserLocalStorage();
+  yield utils.delay(250);
+  yield put({ type: LOGOUT_SUCCESS });
+}
+
 export function* watchLogin() {
   yield takeLatest(LOGIN_REQUEST, loginSaga);
+}
+
+export function* watchLogout() {
+  yield takeLatest(LOGOUT_REQUEST, logoutSaga);
 }
