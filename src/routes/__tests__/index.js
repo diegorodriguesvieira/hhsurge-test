@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/extend-expect';
 import { createMemoryHistory } from 'history';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
