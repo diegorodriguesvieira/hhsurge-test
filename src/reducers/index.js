@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import auth from './auth/reducer';
+import auth from '../containers/login/ducks';
 
 const rootReducer = combineReducers({
   auth,

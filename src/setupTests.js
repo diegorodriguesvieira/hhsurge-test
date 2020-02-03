@@ -25,3 +25,21 @@ Object.defineProperty(window, 'localStorage', {
   value: localStorage,
   writable: true,
 });
+
+global.mockUser = {
+  name: 'Bryon Hooper',
+  user: 'bryon',
+  email: 'bryon_hooper4381@muall.tech',
+  password: 714941,
+  heroId: 1009726,
+};
+
+global.mockUser2 = {
+  name: 'Adina Yang',
+  user: 'adina',
+  email: 'adina_yang1351@yahoo.com',
+  password: 315492,
+  heroId: 1011299,
+};
+
+global.mockUsers = [global.mockUser, global.mockUser2];
