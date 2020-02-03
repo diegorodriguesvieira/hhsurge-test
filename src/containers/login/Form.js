@@ -9,23 +9,25 @@ import TextField from '@material-ui/core/TextField';
 
 import TextFieldPassword from '../../components/TextFieldPassword';
 
-const LoginForm = ({ onSubmit }) => {
+const LoginForm = ({ onSubmit, error, loading }) => {
   const validationSchema = Yup.object().shape({
     username: Yup.string().required('Campo obrigatório'),
     password: Yup.string().required('Campo obrigatório'),
   });
 
   const hasError = (errors, touched, name) => {
-    const error = getIn(errors, name);
-    const touch = getIn(touched, name);
-    return touch && error ? error : null;
+    const fieldError = getIn(errors, name);
+    const fieldTouch = getIn(touched, name);
+    return fieldTouch && fieldError ? fieldError : null;
   };
+
+  const errorMessage = 'Wrong username or password. Try again.';
 
   return (
     <Formik
       onSubmit={onSubmit}
       validationSchema={validationSchema}
-      initialValues={{ username: '', password: '' }}
+      initialValues={{ username: 'bryon', password: '714941' }}
       enableReinitialize
     >
       {({ errors, touched }) => (
@@ -52,8 +54,10 @@ const LoginForm = ({ onSubmit }) => {
               <FormControl margin="normal" fullWidth>
                 <Field
                   as={TextFieldPassword}
-                  error={Boolean(hasError(errors, touched, 'password'))}
-                  helperText={hasError(errors, touched, 'password')}
+                  error={Boolean(hasError(errors, touched, 'password')) || Boolean(error)}
+                  helperText={
+                    hasError(errors, touched, 'password') || (error ? errorMessage : null)
+                  }
                   id="password"
                   name="password"
                 />
@@ -61,7 +65,13 @@ const LoginForm = ({ onSubmit }) => {
             </Grid>
             <Grid item xs={12}>
               <FormControl margin="dense" fullWidth>
-                <Button color="primary" fullWidth type="submit" variant="contained">
+                <Button
+                  disabled={loading}
+                  color="primary"
+                  fullWidth
+                  type="submit"
+                  variant="contained"
+                >
                   Sign In
                 </Button>
               </FormControl>
@@ -73,7 +83,14 @@ const LoginForm = ({ onSubmit }) => {
   );
 };
 
+LoginForm.defaultProps = {
+  error: false,
+  loading: false,
+};
+
 LoginForm.propTypes = {
+  error: PropTypes.bool,
+  loading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
 };
 
