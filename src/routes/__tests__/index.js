@@ -1,21 +1,9 @@
 import { createMemoryHistory } from 'history';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { render } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import React from 'react';
 
+import { renderWithRedux } from '../../../test';
 import App from '../index';
-import reducer from '../../reducers';
-
-function renderWithRedux(ui, { initialState, store = createStore(reducer, initialState) } = {}) {
-  return {
-    ...render(<Provider store={store}>{ui}</Provider>),
-    // adding `store` to the returned utilities to allow us
-    // to reference it in our tests
-    store,
-  };
-}
 
 describe('Routes', () => {
   const user = { name: 'Diego' };
