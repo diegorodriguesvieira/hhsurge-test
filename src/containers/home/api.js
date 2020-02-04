@@ -10,4 +10,6 @@ export const getComicsByCharacterId = characterId => {
   });
 };
 
-export default getComicsByCharacterId;
+export const getCharacterById = characterId => {
+  return marvelAPI.get(`/characters/${characterId}`);
+};

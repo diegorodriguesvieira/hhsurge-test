@@ -27,7 +27,7 @@ const LoginForm = ({ onSubmit, error, loading }) => {
     <Formik
       onSubmit={onSubmit}
       validationSchema={validationSchema}
-      initialValues={{ username: 'peter', password: '357473' }}
+      initialValues={{ username: 'adina', password: '315492' }}
       enableReinitialize
     >
       {({ errors, touched }) => (

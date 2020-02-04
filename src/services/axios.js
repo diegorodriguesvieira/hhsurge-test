@@ -10,10 +10,7 @@ const marvelAPI = axios.create({
 });
 
 marvelAPI.interceptors.request.use(config => {
-  const newConfig = config;
-  newConfig.params.apikey = apiKey;
-
-  return newConfig;
+  return { ...config, params: { ...config.params, apikey: apiKey } };
 });
 
 export default marvelAPI;

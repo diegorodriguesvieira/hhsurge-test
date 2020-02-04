@@ -7,8 +7,19 @@ import Cover from '../Cover';
 import Footer from './Footer';
 import Header from './Header';
 import Infos from './Infos';
+import Date from './Date';
 
-const Comic = ({ cover, creators, description, edition, format, moreDetails, pages, title }) => {
+const Comic = ({
+  cover,
+  creators,
+  description,
+  edition,
+  format,
+  modified,
+  moreDetails,
+  pages,
+  title,
+}) => {
   return (
     <Grid item md={6}>
       <Grid container spacing={2}>
@@ -17,6 +28,7 @@ const Comic = ({ cover, creators, description, edition, format, moreDetails, pag
         </Grid>
         <Grid item md={8}>
           <Header title={title} creators={creators} />
+          <Date label="Last modification" date={modified} />
           <Infos data={[edition, format, pages].filter(item => !!item)} />
           <Description testId="comic-description" data={description} />
           <Footer url={moreDetails} />
@@ -32,6 +44,7 @@ Comic.defaultProps = {
   description: '',
   edition: '',
   format: '',
+  modified: '',
   moreDetails: '',
   pages: '',
   title: '',
@@ -43,6 +56,7 @@ Comic.propTypes = {
   description: PropTypes.string,
   edition: PropTypes.string,
   format: PropTypes.string,
+  modified: PropTypes.string,
   moreDetails: PropTypes.string,
   pages: PropTypes.string,
   title: PropTypes.string,

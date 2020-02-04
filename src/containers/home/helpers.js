@@ -1,5 +1,19 @@
 export const normalizeComicToRender = comic => {
-  const { description, format, id, issueNumber, pageCount, thumbnail, title, urls } = comic;
+  if (!comic) {
+    return false;
+  }
+
+  const {
+    description,
+    format,
+    id,
+    issueNumber,
+    modified,
+    pageCount,
+    thumbnail,
+    title,
+    urls,
+  } = comic;
 
   const creators = Array.isArray(comic.creators.items) ? comic.creators.items : [];
   const normalizedCreators = creators.map(({ name }) => name).join(' / ');
@@ -22,7 +36,17 @@ export const normalizeComicToRender = comic => {
     edition: normalizedEdition,
     description: normalizedDescription,
     moreDetails: normalizedMoreDetails,
+    modified,
   };
 };
 
-export default normalizeComicToRender;
+export const normalizeCharacterToRender = character => {
+  if (!character) {
+    return false;
+  }
+
+  const { id, name, description, thumbnail } = character;
+  const normalizeThumbnail = `${thumbnail.path}.${thumbnail.extension}`;
+
+  return { id, title: name, description, cover: normalizeThumbnail };
+};
