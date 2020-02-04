@@ -13,13 +13,18 @@ const useStyles = makeStyles({
   },
 });
 
-const Description = ({ data }) => {
+const Description = ({ data, testId }) => {
   const classes = useStyles();
 
   return (
     <Box mb={2}>
       {data && (
-        <Typography className={classes.description} data-testid="comic-description" variant="body2">
+        <Typography
+          color="textSecondary"
+          className={classes.description}
+          data-testid={testId}
+          variant="body2"
+        >
           {data}
         </Typography>
       )}
@@ -29,6 +34,7 @@ const Description = ({ data }) => {
 
 Description.propTypes = {
   data: PropTypes.string.isRequired,
+  testId: PropTypes.string.isRequired,
 };
 
 export default Description;

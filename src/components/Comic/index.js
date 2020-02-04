@@ -2,8 +2,8 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Cover from './Cover';
-import Description from './Description';
+import Description from '../Description';
+import Cover from '../Cover';
 import Footer from './Footer';
 import Header from './Header';
 import Infos from './Infos';
@@ -12,11 +12,13 @@ const Comic = ({ cover, creators, description, edition, format, moreDetails, pag
   return (
     <Grid item md={6}>
       <Grid container spacing={2}>
-        <Cover src={cover} />
+        <Grid item xs={12} md={4}>
+          <Cover src={cover} testId="comic-cover" />
+        </Grid>
         <Grid item md={8}>
           <Header title={title} creators={creators} />
           <Infos data={[edition, format, pages].filter(item => !!item)} />
-          <Description data={description} />
+          <Description testId="comic-description" data={description} />
           <Footer url={moreDetails} />
         </Grid>
       </Grid>
