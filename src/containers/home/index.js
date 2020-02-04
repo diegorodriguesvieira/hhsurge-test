@@ -8,10 +8,15 @@ import { getComics, getCharacter } from './ducks';
 import * as helpers from './helpers';
 import Comic from '../../components/Comic';
 import Hero from '../../components/Hero';
+import Loading from '../../components/Loading.js';
 
 const Home = () => {
   const user = useSelector(state => state.auth.user);
   const comics = useSelector(state => state.hero.comics);
+
+  const loadingComics = useSelector(state => state.hero.loadingComics);
+  const loadingCharacter = useSelector(state => state.hero.loadingCharacter);
+
   const character = useSelector(state => state.hero.character);
   const dispatch = useDispatch();
 
@@ -24,22 +29,27 @@ const Home = () => {
     fetchData();
   }, [fetchData]);
 
+  const renderLoading = loadingCharacter || loadingComics;
+
   return (
     <div data-testid="home">
       <Grid container spacing={2}>
-        {Array.isArray(character) && <Hero />}
-        <Hero {...helpers.normalizeCharacterToRender(character)} />
-        <Grid item xs={12}>
-          <Box mt={4}>
-            <Typography variant="h3" component="h2">
-              Comics
-            </Typography>
-          </Box>
-        </Grid>
-        {Array.isArray(comics) &&
-          comics.map(comic => {
-            return <Comic key={comic.id} {...helpers.normalizeComicToRender(comic)} />;
-          })}
+        {renderLoading && <Loading />}
+        {Array.isArray(character) && <Hero {...helpers.normalizeCharacterToRender(character)} />}
+        {Array.isArray(comics) && (
+          <>
+            <Grid item xs={12}>
+              <Box mt={4}>
+                <Typography variant="h3" component="h2">
+                  Comics
+                </Typography>
+              </Box>
+            </Grid>
+            {comics.map(comic => {
+              return <Comic key={comic.id} {...helpers.normalizeComicToRender(comic)} />;
+            })}
+          </>
+        )}
       </Grid>
     </div>
   );
