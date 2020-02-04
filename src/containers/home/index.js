@@ -29,12 +29,13 @@ const Home = () => {
     fetchData();
   }, [fetchData]);
 
-  const renderLoading = loadingCharacter || loadingComics;
+  if (loadingCharacter || loadingComics) {
+    return <Loading />;
+  }
 
   return (
     <div data-testid="home">
       <Grid container spacing={2}>
-        {renderLoading && <Loading />}
         {character && <Hero {...helpers.normalizeCharacterToRender(character)} />}
         {Array.isArray(comics) && (
           <>
