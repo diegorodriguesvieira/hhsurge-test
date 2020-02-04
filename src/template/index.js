@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Containter from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -30,7 +31,11 @@ const Template = ({ children }) => {
           </Toolbar>
         </Box>
       </AppBar>
-      <Box component="main">{children}</Box>
+      <Box component="main">
+        <Box component={Paper} square pt={3} pb={3} pl={2} pr={2}>
+          {children}
+        </Box>
+      </Box>
     </Containter>
   );
 };
