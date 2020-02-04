@@ -35,7 +35,7 @@ const Home = () => {
     <div data-testid="home">
       <Grid container spacing={2}>
         {renderLoading && <Loading />}
-        {Array.isArray(character) && <Hero {...helpers.normalizeCharacterToRender(character)} />}
+        {character && <Hero {...helpers.normalizeCharacterToRender(character)} />}
         {Array.isArray(comics) && (
           <>
             <Grid item xs={12}>
