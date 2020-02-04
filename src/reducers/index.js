@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import auth, { LOGOUT_SUCCESS } from '../containers/login/ducks';
-import comics from '../containers/home/ducks';
+import hero from '../containers/home/ducks';
 
 const appReducer = combineReducers({
   auth,
-  comics,
+  hero,
 });
 
 const rootReducer = (state, action) => {

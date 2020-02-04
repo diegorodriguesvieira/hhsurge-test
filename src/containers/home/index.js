@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 import { getComics } from './ducks';
 import * as helpers from './helpers';
@@ -8,12 +8,16 @@ import Comic from '../../components/Comic';
 
 const Home = () => {
   const user = useSelector(state => state.auth.user);
-  const comics = useSelector(state => state.comics.items);
+  const comics = useSelector(state => state.hero.comics);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const fetchComics = useCallback(() => {
     dispatch(getComics(user.heroId));
-  }, []);
+  }, [user.heroId, dispatch]);
+
+  useEffect(() => {
+    fetchComics();
+  }, [fetchComics]);
 
   return (
     <div data-testid="home">
