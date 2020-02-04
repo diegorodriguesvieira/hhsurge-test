@@ -13,7 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getComics(user.heroId));
-  });
+  }, []);
 
   return (
     <div data-testid="home">
